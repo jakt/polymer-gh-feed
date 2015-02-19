@@ -1,0 +1,72 @@
+<link rel="import" href="../bower_components/polymer/polymer.html" >
+<link rel="import" href="../bower_components/mark-down/mark-down.html">
+<link rel="import" href="issue-comments.html">
+
+<polymer-element name="issue-detail" attributes="name body avatar number labels comments comments_url">
+    <template>
+        <style>
+            .collapse-content {
+                padding: 15px;
+                border: 1px solid #dedede;
+            }
+
+            .comment-container {
+                background: rgb(235, 235, 235);
+                padding: 1em;
+            }
+
+            p {
+                margin: 1em 0;
+            }
+
+            .avatar {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+        </style>
+
+        <div class="comment-container">
+            <core-image class="avatar" sizing="cover" src="{{ avatar }}"></core-image>
+
+            <div class="title">{{ name }}</div>
+
+            <div>{{ number }}</div>
+
+            <template repeat="{{ label in labels }}">
+                <span class="label" style="background-color: #{{ label.color }}">{{ label.name }}</span>
+            </template>
+
+            <template if="{{ body }}">
+                <mark-down>{{ body }}</mark-down>
+            </template>
+
+            <template if="{{ !body }}">
+                No body
+            </template>
+        </div>
+
+        <template if="{{ comments > 0 }}">
+            <p>Show Comments &nbsp;&nbsp;
+                <paper-toggle-button checked="false" id="toggler" on-change="{{ toggleComments }}"></paper-toggle-button>
+            </p>
+            <div>
+                <core-collapse id="collapse">
+                    <issue-comments comments_url="{{ comments_url }}"></issue-comments>
+                </core-collapse>
+            </div>
+        </template>
+
+    </template>
+
+    <script>
+        Polymer({
+            toggleComments: function (e) {
+                this.$.collapse.toggle();
+            }
+        });
+    </script>
+</polymer-element>
+
+

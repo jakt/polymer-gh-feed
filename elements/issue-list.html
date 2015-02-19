@@ -1,0 +1,29 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="github-issue.html">
+
+<polymer-element name="issue-list" attributes="category">
+
+    <template>
+        <core-ajax auto url="https://api.github.com/repos/polymer/polymer/issues?state={{ category }}" handleAs="json"
+                   on-core-response="{{ handleResponse }}"></core-ajax>
+
+        <template repeat="{{ issue in issues }}">
+            <github-issue name="{{ issue.title }}" body="{{ issue.body }}" number="{{ issue.number }}"
+                          avatar="{{ issue.user.avatar_url }}" labels="{{ issue.labels }}" comments="{{ issue.comments }}" comments_url="{{ issue.comments_url }}"></github-issue>
+        </template>
+    </template>
+
+    <script>
+        Polymer({
+            issues: [],
+
+            handleResponse: function(e) {
+                this.issues = e.detail.response;
+            },
+
+            category: 'open'
+        });
+    </script>
+
+</polymer-element>

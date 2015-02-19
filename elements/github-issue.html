@@ -1,0 +1,94 @@
+<link rel="import" href="../bower_components/polymer/polymer.html" >
+<link rel="import" href="issue-detail.html">
+
+<polymer-element name="github-issue" attributes="name body avatar number labels comments comments_url">
+    <template>
+        <style no-shim>
+            :host {
+                border-radius: 3px;
+                margin-bottom: 20px;
+                display: block;
+                background-color: #fff;
+                box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+                width: 500px;
+                padding: 25px;
+                position: relative;
+                cursor: pointer;
+                transition: .25s all;
+            }
+
+            :host(:hover) {
+                background-color: #EFEFEF;
+            }
+
+            @media (max-width: 600px) {
+                :host {
+                    width: 95%;
+                }
+            }
+
+            .title {
+                font-weight: 500;
+                font-size: 20px;
+                color: #333;
+            }
+
+            .label {
+                display: inline-block;
+                border-radius: 5px;
+                padding-left: 5px;
+                padding-right: 5px;
+                color: white;
+                margin-top: 10px;
+            }
+
+            .avatar {
+                width:100px;
+                height:100px;
+                border-radius: 50%;
+            }
+
+            .details {
+                padding-left: 20px;
+            }
+
+            .number {
+                position: absolute;
+                bottom: 10px;
+                right: 15px;
+                color: #999;
+                font-size: 18px;
+            }
+
+        </style>
+
+        <div on-tap="{{ toggleDialog }}" layout horizontal center>
+            <core-image class="avatar" sizing="cover" src="{{ avatar }}"></core-image>
+
+            <div class="details" flex>
+                <div class="title">{{ name }}</div>
+
+                <span class="number">#{{ number }}</span>
+
+                <template repeat="{{ label in labels }}">
+                    <span class="label" style="background-color: #{{ label.color }}">{{ label.name }}</span>
+                </template>
+            </div>
+
+            <paper-action-dialog id="dialog" backdrop transition="core-transition-center">
+                <div><paper-icon-button noink dismissive icon="clear" title="close"></paper-icon-button></div>
+                <issue-detail name="{{ name }}" body="{{ body }}" avatar="{{ avatar }}" number="{{ number }}"
+                              labels="{{ labels }}" comments="{{ comments }}" comments_url="{{ comments_url }}"></issue-detail>
+            </paper-action-dialog>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            toggleDialog: function() {
+                this.$.dialog.toggle();
+            }
+        });
+    </script>
+
+</polymer-element>
