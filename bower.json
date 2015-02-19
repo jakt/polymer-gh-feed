@@ -26,8 +26,8 @@
   "resolutions": {
     "polymer": "^0.5",
     "core-ajax": "~0.5.5",
-    "platform": "^0.4.0",
     "core-component-page": "^0.5",
-    "webcomponentsjs": "^0.5"
+    "webcomponentsjs": "^0.5",
+    "core-shared-lib": "^0.5"
   }
 }

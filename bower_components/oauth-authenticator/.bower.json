@@ -1,0 +1,25 @@
+{
+  "name": "oauth-authenticator",
+  "version": "0.0.1",
+  "authors": [
+    "Matt Cooper <cooperm@google.com>"
+  ],
+  "homepage": "http://mattcooper.github.io/oauth-authenticator",
+  "description": "Web Componenent to authenticate with OAuth 2.0",
+  "main": "oauth-authenticator.html",
+  "license": "MIT",
+  "dependencies": {
+    "polymer": "Polymer/polymer#master",
+    "google-apis": "GoogleWebComponents/google-apis#~0.3.1",
+    "core-ajax": "Polymer/core-ajax#master"
+  },
+  "_release": "0.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.1",
+    "commit": "579cc25808f6d0db27ad68d1d14a178ebe367a52"
+  },
+  "_source": "https://github.com/mattcooper/oauth-authenticator.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/mattcooper/oauth-authenticator.git"
+}
